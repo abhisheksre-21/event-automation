@@ -53,4 +53,8 @@ abhishek@IBLW5CD3303X8Z:~/monitoring-stack/prometheus-grafana-monitoring-stack$ 
 Note: Used host IP and exposed port to connect to AWX API   
 
 
+To get Job ID from AWX console:
+Resource->Template (We will get Job ID from URL) Example: Below url 9 is the Job ID
+http://localhost:10445/#/templates/job_template/9/details
+
 
