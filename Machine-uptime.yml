@@ -10,5 +10,19 @@
     - name: Show uptime
       debug:
         msg: "The system uptime is: {{ uptime_output.stdout.split()[0] }} seconds"
+    - name: Silence alert in Alertmanager
+      shell: |
+        curl -XPOST -H "Content-Type: application/json" \
+          -d '{
+              "matchers": [{"name": "alertname", "value": "HighMemoryUsage"}],
+              "startsAt": "{{ ansible_date_time.iso8601 }}",
+              "endsAt": "{{ (ansible_date_time.iso8601 | to_datetime | community.general.to_datetime('%Y-%m-%dT%H:%M:%S') + 600) | to_datetime('%Y-%m-%dT%H:%M:%S') }}",
+              "createdBy": "AWX",
+              "comment": "Resolved by automated job"
+          }' \
+          http://alertmanager-url/api/v1/silences
+      environment:
+        ALERTMANAGER_URL: "http://alertmanager-url/api/v1/silences"
+
 
   
