@@ -4,7 +4,7 @@
   gather_facts: no  # No need to gather all facts if you only need uptime
   tasks:
     - name: Get system uptime
-      command: uptime -p  # Use the 'uptime -p' command to get a human-readable output
+      command: uptime -p  # Get a human-readable uptime
       register: uptime_output
 
     - name: Show uptime
