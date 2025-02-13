@@ -1,12 +1,12 @@
 ---
 - name: Check Machine Uptime
   hosts: localhost
-  gather_facts: no  # No need to gather all facts if you only need uptime
+  gather_facts: no  # Skip fact gathering
   tasks:
-    - name: Get system uptime
-      command: uptime -p  # Get a human-readable uptime
+    - name: Get system uptime from /proc/uptime
+      command: cat /proc/uptime
       register: uptime_output
 
     - name: Show uptime
       debug:
-        msg: "The system uptime is: {{ uptime_output.stdout }}"
+        msg: "The system uptime is: {{ uptime_output.stdout.split()[0] }} seconds"
