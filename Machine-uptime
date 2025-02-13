@@ -1,0 +1,8 @@
+---
+- name: Check Machine Uptime
+  hosts: localhost
+  gather_facts: yes  # This will gather all system facts, including uptime
+  tasks:
+    - name: Get system uptime
+      debug:
+        msg: "The system uptime is: {{ ansible_facts.uptime }}"
