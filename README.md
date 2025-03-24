@@ -1,4 +1,4 @@
-Installed AWX using minikube
+Install AWX using minikube
 https://www.linuxtechi.com/install-ansible-awx-on-ubuntu/
 
 Steps for setup:
