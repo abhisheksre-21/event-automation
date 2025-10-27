@@ -1,0 +1,8 @@
+- name: Collect system info
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Save system facts
+      copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: "/tmp/system_snapshot.json"

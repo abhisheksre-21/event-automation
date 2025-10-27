@@ -1,0 +1,9 @@
+- name: Reboot server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Reboot the machine
+      reboot:
+        msg: "Reboot initiated by Ansible"
+        pre_reboot_delay: 10
+        post_reboot_delay: 30

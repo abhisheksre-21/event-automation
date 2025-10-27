@@ -1,0 +1,22 @@
+- name: Reboot host on alert
+  hosts: all
+  become: yes
+  vars:
+    alert_triggered: true
+  tasks:
+    - name: Check if alert is triggered
+      debug:
+        msg: "Alert triggered, proceeding with reboot"
+      when: alert_triggered
+
+    - name: Reboot the host
+      reboot:
+        msg: "Triggered by alert automation"
+        post_reboot_delay: 60
+      when: alert_triggered
+
+    - name: Confirm host is back online
+      wait_for_connection:
+        timeout: 300
+        delay: 10
+        sleep: 5

@@ -1,0 +1,16 @@
+- name: Recover crashed service
+  hosts: all
+  become: yes
+  vars:
+    service_name: "nginx"
+  tasks:
+    - name: Check service status
+      shell: systemctl is-active {{ service_name }}
+      register: service_status
+      ignore_errors: yes
+
+    - name: Restart service if inactive
+      service:
+        name: "{{ service_name }}"
+        state: restarted
+      when: service_status.stdout != "active"

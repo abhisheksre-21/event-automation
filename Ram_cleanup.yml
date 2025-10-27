@@ -1,0 +1,9 @@
+- name: Clear system cache
+  become: yes
+  shell: echo 3 > /proc/sys/vm/drop_caches
+
+- name: Restart memory-heavy service
+  become: yes
+  service:
+    name: apache2
+    state: restarted

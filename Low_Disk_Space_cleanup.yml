@@ -1,0 +1,15 @@
+---
+- name: Cleanup disk space
+  hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  tasks:
+    - name: Remove old logs
+      shell: find /var/log -type f -name "*.log" -mtime +7 -delete
+
+    - name: Clean apt cache
+      apt:
+        autoclean: yes
+        autoremove: yes

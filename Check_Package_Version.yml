@@ -1,0 +1,11 @@
+- name: Check Python version
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Get Python version
+      shell: python3 --version
+      register: python_version
+
+    - name: Show Python version
+      debug:
+        msg: "{{ python_version.stdout }}"

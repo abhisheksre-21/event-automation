@@ -1,0 +1,11 @@
+- name: Investigate high CPU usage
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Get top CPU-consuming processes
+      shell: ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+      register: cpu_output
+
+    - name: Show CPU usage
+      debug:
+        msg: "{{ cpu_output.stdout }}"

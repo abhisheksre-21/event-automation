@@ -1,0 +1,12 @@
+- name: Check nginx service status
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Check if nginx is running
+      shell: systemctl is-active nginx
+      register: nginx_status
+      ignore_errors: yes
+
+    - name: Show nginx status
+      debug:
+        msg: "{{ nginx_status.stdout }}"

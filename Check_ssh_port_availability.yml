@@ -1,0 +1,11 @@
+- name: Check SSH port
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Check if port 22 is open
+      shell: nc -zv localhost 22
+      register: ssh_port
+
+    - name: Show SSH port status
+      debug:
+        msg: "{{ ssh_port.stdout }}"

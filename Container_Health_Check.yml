@@ -1,0 +1,11 @@
+- name: Check Docker container health
+  hosts: all
+  become: yes
+  tasks:
+    - name: List unhealthy containers
+      shell: docker ps --filter "health=unhealthy"
+      register: unhealthy_containers
+
+    - name: Show unhealthy containers
+      debug:
+        msg: "{{ unhealthy_containers.stdout }}"
