@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Run uptime command
-      shell: uptime
+      shell: /usr/bin/uptime
       register: uptime_output
 
     - name: Show uptime
