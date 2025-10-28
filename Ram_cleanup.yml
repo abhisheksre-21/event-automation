@@ -1,9 +1,11 @@
-- name: Clear system cache
+- name: Clear cache and restart service
+  hosts: all
   become: yes
-  shell: echo 3 > /proc/sys/vm/drop_caches
+  tasks:
+    - name: Clear system cache
+      ansible.builtin.shell: echo 3 > /proc/sys/vm/drop_caches
 
-- name: Restart memory-heavy service
-  become: yes
-  service:
-    name: apache2
-    state: restarted
+    - name: Restart memory-heavy service
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
