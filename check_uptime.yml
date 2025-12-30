@@ -1,14 +1,13 @@
 
-- name: Check system uptime on controller
-  hosts: localhost
-  connection: local
+- name: Check system uptime
+  hosts: all
   gather_facts: no
+  become: false
 
   tasks:
-    - name: Run uptime command via PATH
-      ansible.builtin.shell: "uptime"
+    - name: Run uptime command
+      ansible.builtin.command: uptime
       register: uptime_output
-      changed_when: false
 
     - name: Show uptime
       ansible.builtin.debug:
