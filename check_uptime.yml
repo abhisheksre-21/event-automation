@@ -1,5 +1,5 @@
 - name: Check system uptime
-  hosts: localhost
+  hosts: all
   connection: local
   gather_facts: no
   tasks:
